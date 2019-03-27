@@ -24,43 +24,46 @@ public class ServiceController {
     private static Map<String, Product> productRepo = new HashMap<String, Product>();
    static {
       Product honey = new Product();
-      honey.setId("1");
-      honey.setName("Honey");
+      honey.seth("1");
+      honey.setpt("Honey");
       productRepo.put(honey.getId(), honey);
       
       Product almond = new Product();
-      almond.setId("2");
-      almond.setName("Almond");
+      almond.seth("2");
+      almond.setpt("Almond");
       productRepo.put(almond.getId(), almond);
    }
    
-
-   @RequestMapping(value = "/products")
-   public ResponseEntity<Collection<Product>> getProduct() {
-      return new ResponseEntity<Collection<Product>>(productRepo.values(), HttpStatus.OK);
-   }
-   
-	@RequestMapping(value ="/getData/{id}", method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<Collection<Product>> getEmployee(@PathVariable("id") int empId) {
-	    System.out.println("LOKO: " + productRepo);  
-	    System.out.println("LOKO: " + productRepo.values()); 
-	    System.out.println(Arrays.asList( productRepo.get(String.valueOf(String.valueOf(empId)))));
-	    return new ResponseEntity<Collection<Product>>(Arrays.asList( productRepo.get(String.valueOf(empId))), HttpStatus.OK);
-		
-	}
-	
+   /*
+    * http://dataService.com/getData?accountCode=clienteA&targetDevice=XBox&pluginVersion=3.3.1 
+    */
 	@RequestMapping(
 			value ="/getData", 
-			params= {"id","second"},
-			//produces = { "application/xml", "text/xml" }, consumes = MediaType.ALL_VALUE,
+			params= {"accountCode","targetDevice","pluginVersion"},
 			produces = { MediaType.APPLICATION_XML_VALUE},
 			headers = "Accept=application/xml",
 			method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<Collection<Product>> getEmployeeGood(@RequestParam("id") int id, @RequestParam("second") String second) {
+	public @ResponseBody ResponseEntity<q> getEmployeeGood(@RequestParam("accountCode") String accountCode, @RequestParam("targetDevice") String targetDevice, @RequestParam("pluginVersion") String pluginVersion ) {
+	    System.out.println("LOKO: " +accountCode);  
+	    System.out.println("LOKO: " + targetDevice); 
+	    System.out.println("LOKO: " + pluginVersion); 
+	    
+	    return new ResponseEntity<q>(new q(accountCode,targetDevice,pluginVersion), HttpStatus.OK);	
+	}
+	
+/*
+	@RequestMapping(
+			value ="/getData", 
+			params= {"id","second"},
+			produces = { MediaType.APPLICATION_XML_VALUE},
+			headers = "Accept=application/xml",
+			method = RequestMethod.GET)
+	public @ResponseBody ResponseEntity<Product> getEmployeeGood(@RequestParam("id") int id, @RequestParam("second") String second) {
 	    System.out.println("LOKO: " +id);  
 	    System.out.println("LOKO: " + second); 
 
-	    return new ResponseEntity<Collection<Product>>(Arrays.asList( productRepo.get(String.valueOf(id))), HttpStatus.OK);
-		
+	    return new ResponseEntity<Product>(productRepo.get(String.valueOf(id)), HttpStatus.OK);	
 	}
+	
+	*/
 }

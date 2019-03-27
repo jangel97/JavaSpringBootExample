@@ -13,7 +13,6 @@ public class App {
    
    @Component
    public class CustomContainer implements EmbeddedServletContainerCustomizer {
-
        public void customize(ConfigurableEmbeddedServletContainer configurableEmbeddedServletContainer) {
           configurableEmbeddedServletContainer.setPort(80);
        }

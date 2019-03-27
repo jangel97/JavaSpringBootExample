@@ -1,6 +1,6 @@
 # JavaSpringBootExample
 
-http://localhost:8080/getData?id=2&second=something ejemplo de la url
+http://localhost/getData?id=2&second=something ejemplo de la url
 
 mvn clean install //para generar el build dentro del directorio target
 

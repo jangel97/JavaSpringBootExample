@@ -5,28 +5,29 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "product")
 public class Product {
-	   private String id;
-	   private String name;
+	   
+	   private String h;
+	   
+	   private String pt;
 
 	   public String getId() {
-	      return id;
+	      return h;
 	   }
 	   
 	   @XmlElement
-	   public void setId(String id) {
-	      this.id = id;
+	   public void seth(String h) {
+	      this.h = h;
 	   }
 	   public String getName() {
-	      return name;
+	      return pt;
 	   }
-	   
 	   @XmlElement
-	   public void setName(String name) {
-	      this.name = name;
+	   public void setpt(String pt) {
+	      this.pt = pt;
 	   }
 	   
 	   public String toString() {
-		return "PRODUCTO: " + id;
+		return "PRODUCTO: " + h;
 		   
 	   
 	   }
