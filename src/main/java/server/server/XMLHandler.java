@@ -64,6 +64,7 @@ public final class XMLHandler {
 		            	    						NodeList clusters = document.getElementsByTagName("cluster");
 		            	    						for (int k=0; k<clusters.getLength() ; k++) {
 		            	    							if (clusters.item(k).getTextContent().contains(targetDevice)) {
+		            	    								System.out.print(clusters.item(k).getTextContent().split("\n")[2]);System.out.println("kvjvk");
 		            	    								config.addCluster(clusters.item(k).getTextContent().split("\n")[2], Integer.parseInt(clusters.item(k).getTextContent().split("\n")[3]));
 		            	    							}
 		            	    						}
@@ -104,10 +105,10 @@ public final class XMLHandler {
 		   
 		  return config;
 		}	
-	
+	/*
 	public static void main (String args[]) {
 		System.out.println(XMLHandler.check_configuration("clienteA","XBox","3.3.1"));;
 	}
-	
+	*/
 	
 	}

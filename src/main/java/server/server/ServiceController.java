@@ -20,20 +20,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @RestController
-public class ServiceController {
-   
+public class ServiceController { 
    /*
     * http://dataService.com/getData?accountCode=clienteA&targetDevice=XBox&pluginVersion=3.3.1 
-    * PARA BALANCEAR LA CARGA DE LOS CLUSTERS, USAREMOS: tomcat balancer app spring boot
-    * https://stackoverflow.com/questions/3877294/writing-a-weighted-load-balancing-algorithm
-    * HAREMOS QUE SEAN THREADS LOS CLUSTERS Y Q HAGAN EL TRATAMIENTO PARA DEVOLVER EL XML
-    * 
-    * PUEDES TENER VARIAS COLAS Y IR METIENDO EN ORDEN 2,1, 2,1, 2,1 2,1 ,1, y que cada cluster vaya cogiendo; Weight-Based Load Balancing
-    * CAMBIAR LA service url
     * 
     */
-	
-	
 	@RequestMapping(
 			value ="/getData", 
 			params= {"accountCode","targetDevice","pluginVersion"},
@@ -41,10 +32,11 @@ public class ServiceController {
 			headers = "Accept=application/xml",
 			method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<q> getEmployeeGood(@RequestParam("accountCode") String accountCode, @RequestParam("targetDevice") String targetDevice, @RequestParam("pluginVersion") String pluginVersion ) {
-
+		System.out.println("LOKO: " + 	accountCode);
 	    System.out.println("LOKO: " + targetDevice); 
 	    System.out.println("LOKO: " + pluginVersion); 
 	    
-	    return new ResponseEntity<q>(new q(accountCode,targetDevice,pluginVersion), HttpStatus.OK);	
+	    Configuracio config= (XMLHandler.check_configuration(accountCode,targetDevice,pluginVersion));
+	    return new ResponseEntity<q>(new q(config.getClusters().firstKey(),String.valueOf(config.getPingTime()),config.getCode()), HttpStatus.OK);	
 	}
 }

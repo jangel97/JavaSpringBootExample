@@ -15,14 +15,14 @@
 
 <cluster>
 <from>XBox</from>
-<name>clusterA.com </name>
+<name>clusterA.com</name>
 <weight>7</weight>
 </cluster>
 
 
 <cluster>
 <from>XBox</from>
-<name>clusterB.com </name>
+<name>clusterB.com</name>
 <weight>3</weight>
 </cluster>
 
