@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="server.server.AppTest" time="0.006" tests="1" errors="0" skipped="0" failures="0">
+<testsuite name="server.server.AppTest" time="0" tests="1" errors="0" skipped="0" failures="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="C:\Program Files\Java\jdk\jre\bin"/>
@@ -28,7 +28,7 @@
     <property name="os.name" value="Windows 10"/>
     <property name="classworlds.conf" value="C:/apache-maven-3.6.0/bin/m2.conf"/>
     <property name="sun.jnu.encoding" value="Cp1252"/>
-    <property name="java.library.path" value="C:\Program Files\Java\jdk\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:\Users\jang3\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\jang3\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Boxstarter;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0;C:\windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk\bin;C:\Program Files\Java\jre\bin;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\fcs\devkitPro\msys\bin;C:\fcs\devkitPro\devkitARM\bin;C:\fcs\devkitPro\insight\bin;C:\Program Files (x86)\Common Files\Acronis\SnapAPI;C:\apache-maven-3.6.0\bin;C:\Users\jang3\AppData\Local\Microsoft\WindowsApps;C:\Users\jang3\AppData\Roaming\npm;C:\Program Files (x86)\Nmap;C:\Users\jang3\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl;."/>
+    <property name="java.library.path" value="C:\Program Files\Java\jdk\bin;C:\windows\Sun\Java\bin;C:\windows\system32;C:\windows;C:\Users\jang3\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\local\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\usr\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\Users\jang3\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\ProgramData\Boxstarter;C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0;C:\windows\System32\OpenSSH;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\nodejs;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Program Files\Java\jdk\bin;C:\Program Files\Java\jre\bin;C:\Program Files\Intel\WiFi\bin;C:\Program Files\Common Files\Intel\WirelessCommon;C:\fcs\devkitPro\msys\bin;C:\fcs\devkitPro\devkitARM\bin;C:\fcs\devkitPro\insight\bin;C:\Program Files (x86)\Common Files\Acronis\SnapAPI;C:\apache-maven-3.6.0\bin;C:\Users\jang3\AppData\Local\Microsoft\WindowsApps;C:\Users\jang3\AppData\Roaming\npm;C:\Program Files (x86)\Nmap;C:\Program Files\Java\jdk\bin;C:\Users\jang3\AppData\Local\Programs\Microsoft VS Code\bin;C:\Program Files\Git\usr\bin\vendor_perl;C:\Program Files\Git\usr\bin\core_perl;."/>
     <property name="maven.conf" value="C:/apache-maven-3.6.0/conf"/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
     <property name="java.class.version" value="52.0"/>
@@ -62,5 +62,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase name="testApp" classname="server.server.AppTest" time="0.006"/>
+  <testcase name="testApp" classname="server.server.AppTest" time="0"/>
 </testsuite>

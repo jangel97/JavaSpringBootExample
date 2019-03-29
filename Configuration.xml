@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <info>
 
-	<account id="1">
+	<account>
 		<type>clienteA</type>
 			<targetDevice>XBox</targetDevice>
 			<targetDevice>Panasonic</targetDevice>
 		
 	</account>
-	<account id="2">
+	<account>
 		<type>clienteB</type>
 		<targetDevice>osmf</targetDevice>
 	</account>
@@ -16,14 +16,14 @@
 <cluster>
 <from>XBox</from>
 <name>clusterA.com</name>
-<weight>7</weight>
+<weight>70</weight>
 </cluster>
 
 
 <cluster>
 <from>XBox</from>
 <name>clusterB.com</name>
-<weight>3</weight>
+<weight>30</weight>
 </cluster>
 
 <cluster>	
@@ -43,7 +43,6 @@
 <name>clusterB.com</name>
 <weight>5</weight>
 </cluster>
-		
 		
 					
 <device>

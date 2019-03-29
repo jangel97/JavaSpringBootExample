@@ -1,4 +1,6 @@
+server\server\Configuracio.class
 server\server\App.class
+server\server\XMLHandler.class
 server\server\App$CustomContainer.class
 server\server\q.class
 server\server\ServiceController.class
