@@ -1,29 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <info>
 
-	<account>
-		<type>clienteA</type>
-			<targetDevice>XBox</targetDevice>
-			<targetDevice>Panasonic</targetDevice>
-		
-	</account>
-	<account>
-		<type>clienteB</type>
-		<targetDevice>osmf</targetDevice>
-	</account>
+<account>
+<type>clienteA</type>
+<targetDevice>XBox</targetDevice>
+<targetDevice>Panasonic</targetDevice>		
+</account>
 
+<account>
+<type>clienteB</type>
+<targetDevice>osmf</targetDevice>
+</account>
+					
+<device>
+<type>XBox</type>
+<pluginVersion>3.3.1</pluginVersion>
+<pingTime>10</pingTime>				
+</device>
+
+<device>
+<type>Panasonic</type>
+<pluginVersion>3.3.2</pluginVersion>
+<pingTime>5</pingTime>		
+</device>
+
+<device>
+<type>osmf</type>
+<pluginVersion>3.3.1</pluginVersion>
+<pingTime>5</pingTime>			
+</device>
 
 <cluster>
 <from>XBox</from>
 <name>clusterA.com</name>
-<weight>70</weight>
+<weight>7</weight>
 </cluster>
-
 
 <cluster>
 <from>XBox</from>
 <name>clusterB.com</name>
-<weight>30</weight>
+<weight>3</weight>
 </cluster>
 
 <cluster>	
@@ -44,26 +60,5 @@
 <weight>5</weight>
 </cluster>
 		
-					
-<device>
-<type>XBox</type>
-<pluginVersion>3.3.1</pluginVersion>
-<pingTime>10</pingTime>				
-</device>
-
-<device>
-<type>Panasonic</type>
-<pluginVersion>3.3.2</pluginVersion>
-<pingTime>5</pingTime>		
-</device>
-
-
-<device>
-<type>osmf</type>
-<pluginVersion>3.3.1</pluginVersion>
-<pingTime>5</pingTime>
-			
-</device>
-
 </info>
 

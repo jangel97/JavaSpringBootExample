@@ -21,10 +21,10 @@ public final class XMLHandler {
 		        return INSTANCE;
 		 }
 		    
-	public static Configuracio check_configuration (String accountCode, String targetDevice, String pluginVersion) {
-		Configuracio config=new Configuracio();  
+	public static Configuracio check_configuration (String accountCode, String targetDevice, String pluginVersion, String configFile) {
+
 		try {
-	            File archivo = new File("Configuration.xml");
+	            File archivo = new File(configFile);
 	            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 	            DocumentBuilder documentBuilder = dbf.newDocumentBuilder();
 	            Document document = (Document) documentBuilder.parse(archivo);
@@ -36,20 +36,21 @@ public final class XMLHandler {
 	            	    Element eElement = (Element) nNode;
 	            	    if(accountCode.equalsIgnoreCase(eElement.getElementsByTagName("type").item(0).getTextContent())){
 	            	    	for (int i=0;i<eElement.getElementsByTagName("targetDevice").getLength();i++) {
-		            	    	if (eElement.getElementsByTagName("targetDevice").item(i).getTextContent().equalsIgnoreCase(targetDevice)) {
-		            	    		//la plataforma elegida es correcta, vamos a mirar la informacion del plugin
+		            	    	if (eElement.getElementsByTagName("targetDevice").item(i).getTextContent().equalsIgnoreCase(targetDevice)) { //la plataforma elegida es correcta, vamos a mirar la informacion del plugin
 		            	    		NodeList devices = document.getElementsByTagName("device");
 		            	    		for(int j = 0; j < devices.getLength(); j++) {
 		            	    			Node node = devices.item(j);
 		            	    			if(node.getNodeType() == Node.ELEMENT_NODE) {
 		            	    				Element device = (Element) node;
-		            	    				if (device.getElementsByTagName("type").item(0).getTextContent().equalsIgnoreCase(targetDevice)){
-		            	    					//si el dispositivo es el elegido, consultaremos sus versiones disponibles
+		            	    				if (device.getElementsByTagName("type").item(0).getTextContent().equalsIgnoreCase(targetDevice)){ //si el dispositivo es el elegido, consultaremos sus versiones disponibles
 		            	    					if(device.getElementsByTagName("pluginVersion").item(0).getTextContent().equalsIgnoreCase(pluginVersion)) {//VERSION DE PLUGIN CORRECTA		            	    						
-		            	    						config.setPingTime(Integer.parseInt(device.getElementsByTagName("pingTime").item(0).getTextContent()));
-		            	    						config.setPingTime(Integer.parseInt(device.getElementsByTagName("pingTime").item(0).getTextContent()));
-		            	    						//la version del plugin es correcta, vamos a ver los clusters que se usaran
+		            	    						
+		            	    						Configuracio config=new Configuracio();  
+		            	    						
+		            	    						config.setPingTime(Integer.parseInt(device.getElementsByTagName("pingTime").item(0).getTextContent())); 
+		            	    						
 		            	    						NodeList clusters = document.getElementsByTagName("cluster");
+		            	    						
 		            	    						for (int k=0; k<clusters.getLength() ; k++) {
 		            	    							if (clusters.item(k).getTextContent().contains(targetDevice)) {
 		            	    								config.addCluster(clusters.item(k).getTextContent().split("\n")[2], Integer.parseInt(clusters.item(k).getTextContent().split("\n")[3]));

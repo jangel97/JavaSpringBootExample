@@ -1,12 +1,14 @@
 package server.server;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
  
 
 public class Configuracio {
 
-	private TreeMap<String, Integer> clusters = new TreeMap<String,Integer>();
+	private Map<String, Integer> clusters = new HashMap<String,Integer>();
 	private int pingTime;
 	private String code;
 	
@@ -14,7 +16,7 @@ public class Configuracio {
 		this.code= UUID.randomUUID().toString();; //generate unique code
 	}
 
-	public TreeMap<String, Integer> getClusters() {
+	public Map<String, Integer> getClusters() {
 		return clusters;
 	}
 
