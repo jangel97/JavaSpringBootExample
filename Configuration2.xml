@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
+ <!--
+ The aim of this second xml file is to make clear that the configuration is possible to be modified 
+ in runtime by executing this rest call: http://localhost/changeXML?configFile=Configuration2.xml
+ Then the program takes into account the new configuration, with less clients, more clusters and different weights.
+ -->
 <info>
 
 <account>

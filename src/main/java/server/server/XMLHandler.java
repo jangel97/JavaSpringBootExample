@@ -22,7 +22,6 @@ public final class XMLHandler {
 		 }
 		    
 	public static Configuracio check_configuration (String accountCode, String targetDevice, String pluginVersion, String configFile) {
-
 		try {
 	            File archivo = new File(configFile);
 	            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -35,6 +34,7 @@ public final class XMLHandler {
 	            	  if(nNode.getNodeType() == Node.ELEMENT_NODE){
 	            	    Element eElement = (Element) nNode;
 	            	    if(accountCode.equalsIgnoreCase(eElement.getElementsByTagName("type").item(0).getTextContent())){
+	            	    	
 	            	    	for (int i=0;i<eElement.getElementsByTagName("targetDevice").getLength();i++) {
 		            	    	if (eElement.getElementsByTagName("targetDevice").item(i).getTextContent().equalsIgnoreCase(targetDevice)) { //la plataforma elegida es correcta, vamos a mirar la informacion del plugin
 		            	    		NodeList devices = document.getElementsByTagName("device");

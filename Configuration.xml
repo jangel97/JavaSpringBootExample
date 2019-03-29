@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+The structure of this xml is the follwowing:
+Firstly you will see the different accounts which are: clienteA and clienteB with their corresponding devices.
+Afterwards, the configuration of each device is specified, per each device there is the type and its versions and pingtime.
+And last but not least, the configuration for each cluster is defined:
+	-For which platform is it going to be used.
+	-Name.
+	-Weight.
+-->
 <info>
-
 <account>
 <type>clienteA</type>
 <targetDevice>XBox</targetDevice>

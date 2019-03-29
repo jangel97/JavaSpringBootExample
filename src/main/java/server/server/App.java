@@ -5,12 +5,18 @@ import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletCont
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.stereotype.Component;
 
+/*
+ * MAIN APPLICATION 
+ */
 @SpringBootApplication
 public class App {
    public static void main(String[] args) {
       SpringApplication.run(App.class, args);
    }
    
+   /*
+    * Serve in port 80
+    */
    @Component
    public class CustomContainer implements EmbeddedServletContainerCustomizer {
        public void customize(ConfigurableEmbeddedServletContainer configurableEmbeddedServletContainer) {

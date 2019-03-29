@@ -10,7 +10,7 @@ public class q {
 		//@XmlElement
 	    private String h;	//cluster
 		//@XmlElement
-		private String pt;	//ttl
+		private String pt;	//pingtime
 		//@XmlElement
 		private String c;	//code
 
