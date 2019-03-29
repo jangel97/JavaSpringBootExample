@@ -5,19 +5,9 @@
 <type>clienteA</type>
 <targetDevice>XBox</targetDevice>
 <targetDevice>Panasonic</targetDevice>		
+<targetDevice>osmf</targetDevice>	
 </account>
 
-
-<account>
-<type>clienteC</type>
-<targetDevice>XBox</targetDevice>
-<targetDevice>Panasonic</targetDevice>		
-</account>
-		
-<account>
-<type>clienteB</type>
-<targetDevice>osmf</targetDevice>
-</account>
 					
 <device>
 <type>XBox</type>
@@ -40,31 +30,37 @@
 <cluster>
 <from>XBox</from>
 <name>clusterA.com</name>
-<weight>7</weight>
+<weight>3</weight>
 </cluster>
 
 <cluster>
 <from>XBox</from>
 <name>clusterB.com</name>
-<weight>3</weight>
+<weight>7</weight>
+</cluster>
+
+<cluster>
+<from>XBox</from>
+<name>clusterC.com</name>
+<weight>7</weight>
 </cluster>
 
 <cluster>	
 <from>Panasonic</from>
-<name>clusterB.com</name>
-<weight>10</weight>
+<name>clusterA.com</name>
+<weight>1</weight>
 </cluster>
 
 <cluster>	
 <from>osmf</from>
 <name>clusterA.com</name>
-<weight>5</weight>
+<weight>3</weight>
 </cluster>
 
 <cluster>	
 <from>osmf</from>
 <name>clusterB.com</name>
-<weight>5</weight>
+<weight>7</weight>
 </cluster>
 		
 </info>
