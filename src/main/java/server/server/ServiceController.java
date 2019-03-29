@@ -21,22 +21,19 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @RestController
 public class ServiceController {
-    private static Map<String, Product> productRepo = new HashMap<String, Product>();
-   static {
-      Product honey = new Product();
-      honey.seth("1");
-      honey.setpt("Honey");
-      productRepo.put(honey.getId(), honey);
-      
-      Product almond = new Product();
-      almond.seth("2");
-      almond.setpt("Almond");
-      productRepo.put(almond.getId(), almond);
-   }
    
    /*
     * http://dataService.com/getData?accountCode=clienteA&targetDevice=XBox&pluginVersion=3.3.1 
+    * PARA BALANCEAR LA CARGA DE LOS CLUSTERS, USAREMOS: tomcat balancer app spring boot
+    * https://stackoverflow.com/questions/3877294/writing-a-weighted-load-balancing-algorithm
+    * HAREMOS QUE SEAN THREADS LOS CLUSTERS Y Q HAGAN EL TRATAMIENTO PARA DEVOLVER EL XML
+    * 
+    * PUEDES TENER VARIAS COLAS Y IR METIENDO EN ORDEN 2,1, 2,1, 2,1 2,1 ,1, y que cada cluster vaya cogiendo; Weight-Based Load Balancing
+    * CAMBIAR LA service url
+    * 
     */
+	
+	
 	@RequestMapping(
 			value ="/getData", 
 			params= {"accountCode","targetDevice","pluginVersion"},
@@ -44,26 +41,10 @@ public class ServiceController {
 			headers = "Accept=application/xml",
 			method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<q> getEmployeeGood(@RequestParam("accountCode") String accountCode, @RequestParam("targetDevice") String targetDevice, @RequestParam("pluginVersion") String pluginVersion ) {
-	    System.out.println("LOKO: " +accountCode);  
+
 	    System.out.println("LOKO: " + targetDevice); 
 	    System.out.println("LOKO: " + pluginVersion); 
 	    
 	    return new ResponseEntity<q>(new q(accountCode,targetDevice,pluginVersion), HttpStatus.OK);	
 	}
-	
-/*
-	@RequestMapping(
-			value ="/getData", 
-			params= {"id","second"},
-			produces = { MediaType.APPLICATION_XML_VALUE},
-			headers = "Accept=application/xml",
-			method = RequestMethod.GET)
-	public @ResponseBody ResponseEntity<Product> getEmployeeGood(@RequestParam("id") int id, @RequestParam("second") String second) {
-	    System.out.println("LOKO: " +id);  
-	    System.out.println("LOKO: " + second); 
-
-	    return new ResponseEntity<Product>(productRepo.get(String.valueOf(id)), HttpStatus.OK);	
-	}
-	
-	*/
 }

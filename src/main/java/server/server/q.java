@@ -4,13 +4,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
-@XmlRootElement(name = "q")
+@SuppressWarnings({ "restriction", "unused" })
+@XmlRootElement
 public class q {
-		@XmlElement
+		//@XmlElement
 	    private String h;	//cluster
-		@XmlElement
+		//@XmlElement
 		private String pt;	//ttl
-		@XmlElement
+		//@XmlElement
 		private String c;	//code
 
 		public q(String h, String pt, String c) {

@@ -1,4 +1,4 @@
-server\server\Product.class
-server\server\ProductController.class
 server\server\App.class
+server\server\App$CustomContainer.class
+server\server\q.class
 server\server\ServiceController.class
