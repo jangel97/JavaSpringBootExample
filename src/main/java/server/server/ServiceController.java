@@ -20,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ServiceController { 
    
-	
 	private String configFile="Configuration.xml";
 	
 	public String getConfigFile() {
@@ -41,13 +40,11 @@ public class ServiceController {
 		File f = new File(file);
 		System.out.println(f);
 		if(f.exists() && !f.isDirectory()) { //file is updated if and only if it exisits 
-			System.out.println("FICHERO SI QUE EXISTEEEEE");
 			this.configFile=file;	
 			return new ResponseEntity<String>("XML configuration file has been updated to: "+file, HttpStatus.OK);
 	    }
-		System.out.println("PETITION");
 		//otherwise path is not going to be updated    
-	    return new ResponseEntity<String>("Unexisting XML", HttpStatus.OK);
+	    return new ResponseEntity<String>("Unexisting XML", HttpStatus.BAD_REQUEST);
 	   } 
 	
 	
@@ -66,8 +63,7 @@ public class ServiceController {
 	   
 		Configuracio config= XMLHandler.check_configuration(accountCode,targetDevice,pluginVersion,this.configFile); //extract data considering the xml configuration
 		
-		if (config==null) return new ResponseEntity<String>(new String("Provided information is not matching xml configuration"),
-                HttpStatus.NOT_FOUND);
+		if (config==null) return new ResponseEntity<String>("",HttpStatus.OK);
 		
 		String cluster=chooseCluster(config);
 	    return new ResponseEntity<q>(new q(cluster,String.valueOf(config.getPingTime()),config.getCode()), HttpStatus.OK);
