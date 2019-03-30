@@ -3,7 +3,9 @@ package server.server;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
+/*Programmer: Jose Angel Morena
+ * This class encapsulates the information to be returned in the request.
+ */
 @SuppressWarnings({ "restriction", "unused" })
 @XmlRootElement
 public class q {

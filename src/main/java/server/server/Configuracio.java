@@ -5,7 +5,11 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.UUID;
  
-
+/* Programmer: Jose Angel Morena
+ * This class encapsulates the information of the configuration to be delivered to the client.
+ * There is a Map to store the clusters because there may be more than one to handle the petition. The structure is a map because
+ * the name of the cluster is associated to its weight. 
+ */
 public class Configuracio {
 
 	private Map<String, Integer> clusters = new HashMap<String,Integer>();

@@ -8,6 +8,10 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/* Programmer: Jose Angel Morena
+ * This class implements singleton pattern, because in this case it does not require to be instanced more than once.
+ * Its goal is to accomplish that the provided information in the request url is correct according to the xml configuration file.
+*/
 public final class XMLHandler {
 	
 		private static XMLHandler INSTANCE;
@@ -21,6 +25,15 @@ public final class XMLHandler {
 		        return INSTANCE;
 		 }
 		    
+	/* This method handles the configuration file content according to the accountCode, the targetDevice and the pluginVersion.
+	 * It also requires the filename of the configuration file to read.
+	 * If the provided information is not correct because the client does not exist or does not have that target device assigned or there is not
+	 * matching plugin version, then a null object is returned. Otherwise a Configuration instance is returned with all of the information necessary to 
+	 * return, besides from a Map containing the clusters to work and its corresponding weights.
+	 * 
+	 * Partly the code looks so big because the method getElementsByTagName returns a list with no iterable so I had to check element by element. There was
+	 * neither a filter method.
+	 */
 	public static Configuracio check_configuration (String accountCode, String targetDevice, String pluginVersion, String configFile) {
 		try {
 	            File archivo = new File(configFile);
@@ -58,26 +71,26 @@ public final class XMLHandler {
 		            	    						}
 		            	    						return config;
 		            	    					}
-		            	    					//System.out.println("VERSION NO CORRECTA");
+		            	    					//Incorrect version
 		            	    					
 		            	    				}
 		            	    			}
 		            	    		}
-		            	    	}//System.out.println("PLATAFORMA NO CORRECTA");
+		            	    	}//Incorrect platform
 		            	    
 	            	    	}
-	            	    }//System.out.println("NO EXISTE CLIENTE");;
+	            	    }//Non-existing client
 	            	    
 	            	    
 	            	  }
 	            }
-	            return null;
+	            return null;	//url information not correct and then null object is sent
 	        			            			   		
 	      }
 	            catch (Exception e) {
 	                e.printStackTrace();
 	            }
 		   
-		  return null;
+		  return null;	//url information not correct and then null object is sent. Besides the method caught an exception.
 		}	
 	}

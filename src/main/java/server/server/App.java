@@ -6,6 +6,7 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomi
 import org.springframework.stereotype.Component;
 
 /*
+ * Programmer: Jose Angel Morena
  * MAIN APPLICATION 
  */
 @SpringBootApplication

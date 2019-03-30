@@ -15,13 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-/*
+/* Programmer: Jose Angel Morena
  * Rest controller class.
  * It also controls errors.
  */
 @RestController
 public class ServiceController implements ErrorController { 
-   
 	/*
 	 * filename of configuration file
 	 */
@@ -83,15 +82,25 @@ public class ServiceController implements ErrorController {
 
 	
 	/*
-	 * Choose cluster method
-	 * Roulette wheel selection algorithm 
+	 * This methods decides statistically which cluster is to be returned.  
+	 * Roulette wheel selection algorithm  	 
+	 * There is a list of clusters stored in a structure. Then a random number is chosen between 0 and
+	 * the sum of all the weights. This random number is generated with an uniform distribution.
+	 * Search in the cluster list for the first server for which the sum of weights for all servers up 
+	 * to and including this cluster is more than the random value.
+	 *  
+	 * I decided to use this method for three reasons:
+	 * 	- Firstly, if the xml is modified in run time, the frequency of selections is going to be according 
+	 * 	  to the xml configuration. Also if some other clusters are added, these will be taken into consideration.
+	 *  - Secondly, this approach allows to not count the number of requests processed in order to decide which cluster to return.
+	 *  - Last but not least, I believe it to be a good way to distribute the load among the clusters.   
 	 */
 	public String chooseCluster(Configuracio config) {
 	    TreeMap<Integer, String> pool= new TreeMap<Integer, String>();
 	    Integer totalWeight=0;
 	    for ( Entry<String, Integer> entry : config.getClusters().entrySet() ) {
 	        totalWeight += entry.getValue();
-	        pool.put(totalWeight, entry.getKey());
+	        pool.put(totalWeight, entry.getKey());	//associate each server with the sum of the weights so far
 	    }	    
 	    
 	    int rnd = new Random().nextInt(totalWeight);
