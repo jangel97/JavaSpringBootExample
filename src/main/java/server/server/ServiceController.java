@@ -1,9 +1,9 @@
 package server.server;
 
 import java.io.File;
-import java.util.Map.Entry;
+import java.util.Map;
 import java.util.Random;
-import java.util.TreeMap;
+import java.util.UUID;
 
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.http.HttpStatus;
@@ -21,10 +21,24 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class ServiceController implements ErrorController { 
-	/*
-	 * filename of configuration file
+		
+	private Random seed = new Random();//random generator
+	
+	/*This attribute is going to store all of the configuration. Its aim is to provide a preload because this way
+	 * the access to the data is going to be much quicker in the rest call
+	 * 
+	 * I assumed per each technology there is a single version to avoid a one more hash entrance.
 	 */
-	private String configFile="Configuration.xml";
+	private Map<String,Map<String,Configuration>> info;
+
+	private String configFile="Configuration.xml";	//filename of configuration file
+	
+	//un cliente tiene varias plataformas
+	//una plataforma UN UNICO PLUGIN, 
+	//plataforma y plugin sera la clave para entrar en PING TIME Y TREEMAP DE SERVERS
+	public ServiceController() {	
+		info = XMLHandler.returnInfo(this.configFile); //extract data considering the xml configuration
+	}
 	
 	public String getConfigFile() {
 		return configFile;
@@ -38,14 +52,16 @@ public class ServiceController implements ErrorController {
 	 * url example:
 	 * http://localhost/changeXML?configFile=Configuration.xml
 	 * http://localhost/changeXML?configFile=Configuration2.xml
+	 * 
+	 * It is possible to modify the current xml configuration file and then by using the rest call reload that new configuration
 	 */
 	@RequestMapping(value = "/changeXML",params= {"configFile"},method = RequestMethod.GET)
 	public ResponseEntity<?> updateConfigFile(@RequestParam("configFile") String file) { 
 		
 		File f = new File(file);
-		System.out.println(f);
 		if(f.exists() && !f.isDirectory()) { //file is updated if and only if it exisits 
-			this.configFile=file;	
+			this.configFile=file;
+			info = XMLHandler.returnInfo(this.configFile); //extract data considering the xml configuration
 			return new ResponseEntity<String>("XML configuration file has been updated to: "+file, HttpStatus.OK);
 	    }
 		//otherwise path is not going to be updated    
@@ -61,6 +77,11 @@ public class ServiceController implements ErrorController {
 	* Afterwards, the cluster is chosen by the algorithm.
 	* Eventually the xml is returned.
 	*    
+	*    
+	*    The return, chooses a random cluster following a uniform distribution, the reason behind is to distribute more uniformly 
+			 the chosen cluster according to the clusters of that technology
+	*    
+	*    	  	 
     * url example:
     * http://localhost/getData?accountCode=clienteA&targetDevice=XBox&pluginVersion=3.3.1 
     */
@@ -71,43 +92,16 @@ public class ServiceController implements ErrorController {
 			headers = "Accept=application/xml",
 			method = RequestMethod.GET)
 	public @ResponseBody ResponseEntity<?> platformPetition(@RequestParam("accountCode") String accountCode, @RequestParam("targetDevice") String targetDevice, @RequestParam("pluginVersion") String pluginVersion ) {
-	   
-		Configuracio config= XMLHandler.check_configuration(accountCode,targetDevice,pluginVersion,this.configFile); //extract data considering the xml configuration
-		
-		if (config==null) return new ResponseEntity<String>("",HttpStatus.OK);
-		
-		String cluster=chooseCluster(config);
-	    return new ResponseEntity<q>(new q(cluster,String.valueOf(config.getPingTime()),config.getCode()), HttpStatus.OK);
+		try {
+			Configuration config = info.get(accountCode).get(targetDevice+pluginVersion);
+			return new ResponseEntity<q>(new q(config.getClusters().ceilingEntry(new Random().nextInt(config.getTotalWeight()))
+					.getValue(),config.getPingTime(),new UUID(this.seed.nextLong(), this.seed.nextLong()).toString()), HttpStatus.OK);			
+		}
+		catch (Exception e) {
+			return null;
+        }
 	}
-
 	
-	/*
-	 * This methods decides statistically which cluster is to be returned.  
-	 * Roulette wheel selection algorithm  	 
-	 * There is a list of clusters stored in a structure. Then a random number is chosen between 0 and
-	 * the sum of all the weights. This random number is generated with an uniform distribution.
-	 * Search in the cluster list for the first server for which the sum of weights for all servers up 
-	 * to and including this cluster is more than the random value.
-	 *  
-	 * I decided to use this method for three reasons:
-	 * 	- Firstly, if the xml is modified in run time, the frequency of selections is going to be according 
-	 * 	  to the xml configuration. Also if some other clusters are added, these will be taken into consideration.
-	 *  - Secondly, this approach allows to not count the number of requests processed in order to decide which cluster to return.
-	 *  - Last but not least, I believe it to be a good way to distribute the load among the clusters.   
-	 */
-	public String chooseCluster(Configuracio config) {
-	    TreeMap<Integer, String> pool= new TreeMap<Integer, String>();
-	    Integer totalWeight=0;
-	    for ( Entry<String, Integer> entry : config.getClusters().entrySet() ) {
-	        totalWeight += entry.getValue();
-	        pool.put(totalWeight, entry.getKey());	//associate each server with the sum of the weights so far
-	    }	    
-	    
-	    int rnd = new Random().nextInt(totalWeight);
-	    
-	    return pool.ceilingEntry(rnd).getValue();
-	}
-
 	/*
 	 * error handler
 	 */

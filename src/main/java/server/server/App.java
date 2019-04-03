@@ -1,16 +1,21 @@
 package server.server;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.stereotype.Component;
 
+
 /*
  * Programmer: Jose Angel Morena
  * MAIN APPLICATION 
  */
+
 @SpringBootApplication
+@EnableCaching //enables Spring Caching functionality
 public class App {
+	
    public static void main(String[] args) {
       SpringApplication.run(App.class, args);
    }
@@ -23,6 +28,6 @@ public class App {
        public void customize(ConfigurableEmbeddedServletContainer configurableEmbeddedServletContainer) {
           configurableEmbeddedServletContainer.setPort(80);
        }
-
    }
+   
 }
